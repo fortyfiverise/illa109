@@ -1,0 +1,778 @@
+:root {
+    --purple: #BFAAED;
+    --purple-dark: #9181A6;
+    --dark: #131313;
+    --light: #242424;
+    --text-light: #B4B4B4;
+}
+
+html {
+    background: var(--light);
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    color: white;
+  }
+
+* {
+    font-family: "SF Pro Display", sans-serif;
+    box-sizing: border-box;
+    transition: all 0.3s 0s ease;
+}
+  
+a {
+    text-decoration: none;
+}
+
+button {
+    background: none;
+    border: none;
+    padding: 0;
+  }
+  
+.nav-bar {
+    z-index: 20;
+    padding-top: 40px;
+    position: fixed;
+    top: 0%;
+    bottom: auto;
+    left: 0%;
+    right: 0%;
+}
+
+.nav-bar-wrapper {
+    padding: 15px 25px 15px 25px;
+    width: 1100px;
+    background-color: var(--dark);
+    border-radius: 15px;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.nav-bar-wrapper > .logo > svg {
+    width: 30px;
+    height: 30px;
+    color: var(--purple);
+}
+
+.nav-btn-grp {
+    display: flex;
+    flex-direction: row;
+    gap: 50px;
+    align-self: center;
+}
+
+.nav-title {
+    font-size: 20px;
+    font-weight: 500;
+    color: white;
+
+    &:hover {
+        color: var(--purple-dark);
+    }
+
+    &.active {
+        color: var(--purple);
+
+        &:active {
+            transform: scale(1.1);
+        }
+    }
+    
+}
+
+
+
+
+
+
+.container {
+    position: relative;
+    margin-top: 100px;
+    flex-direction: row;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    justify-content: space-between;
+    width: 1100px;
+    height: 750px;
+}
+
+.component-title {
+    height: auto;
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-between;
+    display: flex;
+    margin-bottom: 10px;
+
+    > div {
+        gap: 10px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+
+        > .indicator {
+            width: 5px;
+            height: 25px;
+            border-radius: 5px;
+            background-color: var(--purple);
+        }
+    }
+
+    > div > .title {
+      color: white;
+    }
+
+    > .subtitle > svg {
+        color: var(--text-light);
+
+        &:hover{
+            color:  var(--purple-dark);
+            transform: scale(0.9);
+            cursor: pointer;
+        }
+    }
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: auto;
+}
+
+.deck-selector {
+    height: 100%;
+    width: 320px;
+    background-color: var(--dark);
+    border-radius: 15px;
+    padding: 20px;
+}
+  
+  .deck-selector > .header {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-between;
+    background-color: var(--light);
+    color: white;
+    padding: 15px 25px 15px 25px;
+    border-radius: 15px;
+  }
+  
+  .deck-selector > .header .deck-library, .deck-selector > .header .personal-deck {
+    font-size: 18px;
+    align-self: center;
+    text-align: center;
+    width: 100%;
+    cursor: pointer;
+  }
+  
+  .deck-selector > .header .deck-library:hover, .deck-selector > .header .personal-deck:hover {
+    color: var(--purple-dark);
+  }
+  
+  .deck-selector > .header .deck-library.active:active, .deck-selector > .header .personal-deck.active:active {
+    transform: scale(1.1);
+  }
+  
+  .deck-selector > .header .deck-library.active, .deck-selector > .header .personal-deck.active {
+    color: var(--purple);
+  }
+
+
+
+
+  .deck-content {
+    overflow-y: auto;
+    max-height: 600px;
+    margin: 5px 0px 5px 0px;
+
+    > hr {
+        width: 80%;
+        border: 0;
+        height: 1px;
+        background-image: linear-gradient(to right, rgba(0, 0, 0, 0), var(--purple-dark), rgba(0, 0, 0, 0));
+    }
+
+    > div {
+        display: flex;
+        flex-direction: column;
+        height: auto;
+        width: 100%;
+        padding: 15px 15px;
+        border-radius: 15px;
+        cursor: pointer;
+
+
+        &.active {
+            background-color: var(--light);
+        }
+    
+        > .title {
+            font-size: 20px;
+            color: var(--purple);
+            max-width: 75%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 90%;
+        }
+    
+        > .row {
+            font-weight: 200;
+            margin-top: 5px;
+            color: var(--text-light);
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+
+            > span:nth-child(2) {
+                text-decoration: underline;
+            }
+        }
+    }
+  }
+  
+  .deck-content::-webkit-scrollbar {
+    width: 8px;
+    background: transparent;
+    width: 5px;
+  }
+  
+  .deck-content::-webkit-scrollbar-thumb {
+    width: 5px;
+    background: var(--purple);
+    border-radius: 5px;
+    transform: scale(0.2);
+  }
+
+
+
+
+
+
+
+
+
+
+
+.card {
+  cursor: pointer;
+    background-color: var(--dark);
+    color: var(--purple);
+    width: 750px;
+    height: 100%;
+    border-radius: 15px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    
+    > span {
+        font-size: 35px;
+        text-align: center;
+        white-space: prewrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 90%;
+        height: auto;
+        max-height: 500px;
+    }
+}
+
+.card-btn-grp {
+    margin-top: 30px;
+    background-color: var(--dark);
+    color: var(--purple);
+    width: 750px;
+    height: auto;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+
+    > .left-btn-grp {
+        display: flex;
+        gap: 20px;
+        > svg.active {
+          color: var(--purple-dark);
+          transform: scale(0.9);
+        }
+        > svg:hover {
+          cursor: pointer;
+            transform: scale(0.9);
+            color: var(--purple-dark);
+        }
+    }
+
+    > .center-btn-grp {
+        align-items: center;
+        display: flex;
+        flex-direction: row;
+        gap: 20px;
+    
+        > .row {
+            align-items: center;
+            display: flex;
+            flex-direction: column;
+            width: 50px;
+        }
+
+        > svg:hover {
+          cursor: pointer;
+            transform: scale(0.9);
+            color: var(--purple-dark);
+        }
+    }
+    > svg:hover {
+      cursor: pointer;
+        transform: scale(0.9);
+        color: var(--purple-dark);
+    }
+}
+
+
+
+.chat-box {
+    height: 100%;
+    width: 1100px;
+    background-color: var(--dark);
+    border-radius: 15px;
+    display: block;
+    overflow: auto;
+    padding: 20px;
+
+    > .message {
+        max-width: 600px;
+        height: auto;
+        margin-bottom: 10px;
+        padding: 15px;
+        border-radius: 15px;
+        border-color: transparent;
+        border-style: solid;
+        display: block;
+        text-align: left;
+        
+        &.bot {
+            background: var(--purple-dark);
+
+            float: left;
+            clear: right;
+
+            > span {
+                font-size: 18px;
+                color: var(--dark);
+            }
+        }
+        &.user {
+            color: var(--dark);
+            background: var(--light);
+
+            float: right;
+            clear: left;
+
+            > span {
+                font-size: 18px;
+                color: var(--purple-dark);
+            }
+        }
+        &.wait {
+            background: var(--purple-dark);
+
+            float: left;
+            clear: right;
+
+            > span {
+                font-size: 18px;
+                color: var(--dark);
+                animation: blink 1s ease infinite;
+            }
+        }
+    }
+}
+
+.chat-box::-webkit-scrollbar {
+    width: 8px;
+    background: transparent;
+    width: 5px;
+  }
+  
+  .chat-box::-webkit-scrollbar-thumb {
+    width: 5px;
+    background: var(--purple);
+    border-radius: 5px;
+    transform: scale(0.2);
+  }
+
+
+@keyframes blink {
+    0%{
+        color: var(--dark);
+    }
+    100%{
+        color: var(--purple);
+    }
+}
+
+.chat-input {
+    margin-top: 30px;
+    padding: 20px;
+    height: auto;
+    width: 1100px;
+    background-color: var(--dark);
+    border-radius: 15px;
+    display: flex;
+    flex-direction: row;
+    > svg {
+      margin: auto;
+      margin-right: 10px;
+      margin-left: 10px;
+      width: 20px;
+      height: 20px;
+      color: white;
+      
+      &:hover {
+        color: var(--purple-dark);
+      }
+
+      &.active {
+        transform: scale(1.2);
+        color: var(--purple);
+      }
+    }
+    > input {
+        background-color: transparent;
+        border: none;
+        outline: none;
+        width: 100%;
+        color: white;
+        font-size: 17px;
+        margin: 10px;
+    }
+
+    > button {
+        padding: 10px 15px 10px 15px;
+        background-color: transparent;
+        color: var(--purple);
+        border-radius: 15px;
+        font-size: 17px;
+
+        &:hover {
+            background-color: var(--purple-dark);
+            color: var(--dark);
+        }
+    }
+}
+
+.overlay {
+    -webkit-animation-name: animatetop;
+    -webkit-animation-duration: 0.5s;
+    animation-name: animatetop;
+    animation-duration: 0.5s;
+    z-index: 30;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.558);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .modal {
+
+    width: 700px;
+    height: 500px;
+    background-color: var(--light);
+    border-radius: 15px;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .modal-header {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: rgba(255, 255, 255, 0.5);
+  }
+  
+  .modal-header > span {
+    text-align: left;
+    font: 400 20px "SF Pro Display", sans-serif;
+    position: relative;
+  }
+  
+  .modal-header > svg {
+    text-align: end;
+    font-size: 25px;
+    cursor: pointer;
+  }
+  
+  .modal-content {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+  }
+  
+  .modal-deck-name {
+    margin-top: 40px;
+    max-width: 90%;
+    height: 100px;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font: 500 40px "SF Pro Display", sans-serif;
+    color: var(--purple);
+  }
+  
+  .inline-group {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
+  }
+  
+  .modal-content > form {
+    margin-top: 50px;
+    height: 100%;
+    width: 100%;
+    font: 200 20px "SF Pro Display", sans-serif;
+    align-items: center;
+  }
+  
+  .modal-content > form > label {
+    font-weight: 500;
+    margin-left: 10px;
+    color: var(--purple);
+  }
+  
+  .modal-content > form > label > input,
+  .inline-group > input {
+    margin-top: 10px;
+    width: 100%;
+    padding: 20px;
+    border-radius: 20px;
+    border-style: solid;
+    border-color: transparent;
+    border-width: 1px;
+    box-sizing: border-box;
+    font: 200 20px "SF Pro Display", sans-serif;
+    color: white;   
+    background: var(--dark);
+    outline: none;
+  }
+
+  .modal-button-group > .ghost {
+    color: var(--purple);
+    background-color: transparent;
+    border-radius: 15px;
+    padding: 20px 25px;
+    font: 500 20px "SF Pro Display", sans-serif;
+    align-self: center;
+
+    &:hover {
+      background-color: var(--purple-dark);
+      color: var(--dark);
+    }
+  }
+  
+  .modal-content > form > button,
+  .modal-button-group > button,
+  .import-deck,
+  .inline-group > button {
+    margin-left: 10px;
+    color: var(--dark);
+    background-color: var(--purple);
+    border-radius: 15px;
+    padding: 20px 25px;
+    font: 500 20px "SF Pro Display", sans-serif;
+    align-self: center;
+  }
+  
+  #edit-deck-name-form > button:hover,
+  .modal-button-group > button:hover,
+  .import-deck:hover,
+  .inline-group > button:hover {
+    background-color: var(--purple-dark);
+  }
+  
+  #edit-deck-name-form > button:active,
+  .modal-button-group > button:active,
+  .import-deck:active,
+  .inline-group > button:active {
+    color: var(--yellow);
+    background-color: var(--charleston);
+    border-color: var(--yellow-hover);
+  }
+  
+  .modal-content > form > .helper {
+    color: rgba(255, 255, 255, 0.5);
+    margin-left: 10px;
+    font-size: 15px;
+    text-align: left;
+
+    &.success {
+      color: hsla(120, 100%, 65%, 0.446)
+    }
+
+    &.error {
+      color: hsl(0, 100%, 61%);
+    }
+  }
+  
+  .modal-button-group {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+
+  .feedback-form {
+    padding: 40px;
+    background-color: var(--dark);
+    border-radius: 15px;
+    width: 1100px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    box-sizing: border-box;
+  }
+  
+  .feedback-form > label {
+    font-weight: 500;
+    color: var(--purple);
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .feedback-form > label > input,
+  .feedback-form > label > textarea {
+    margin: 10px 0px 10px 0px;
+    padding: 20px;
+    border-radius: 20px;
+    border-style: solid;
+    border-color: transparent;
+    border-width: 1px;
+    width: 100%;
+    box-sizing: border-box;
+    font: 200 20px "SF Pro Display", sans-serif;
+    flex-grow: 1;
+    color: white;
+    background: var(--light);
+    outline: none;
+  }
+  
+  .feedback-form > label > textarea {
+    height: 320px;
+    resize: none;
+
+    &::-webkit-scrollbar {
+      width: 8px;
+      background: transparent;
+      width: 5px;
+    }
+    
+    &::-webkit-scrollbar-thumb {
+      width: 5px;
+      background: var(--purple);
+      border-radius: 5px;
+      transform: scale(0.2);
+    }
+  }
+  
+  .feedback-form > button {
+    align-self: flex-end;
+    color: var(--dark);
+    background-color: var(--purple);
+    border-radius: 20px;
+    border-style: solid;
+    border-color: transparent;
+    border-width: 1px;
+    padding: 20px 25px;
+    font-size: 20px;
+    font-weight: 500;
+
+    &:hover {
+      background-color: var(--purple-dark);
+    }
+  }
+
+
+.home {
+  width: 1100px;
+  height: 100%;
+  background-color: var(--dark);
+  border-radius: 15px;
+  padding: 50px;
+  
+  > div:nth-child(1) {
+    padding-top: 70px;
+    padding-bottom: 100px;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+
+    > span {
+      text-align: center;
+      font-size: 20px;
+    }
+  }
+}
+
+
+.features {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  
+  > div {
+    padding: 30px;
+    border-radius: 25px;
+    width: 400px;
+    height: 250px;
+    background: var(--dark);
+    box-shadow:  18px 18px 36px #0c0c0c,
+                -18px -18px 36px #1a1a1a;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+    
+    > span {
+      text-align: center;
+
+      &:nth-child(1) {
+        color: var(--purple);
+        font-weight: 500;
+        font-size: 25px;
+      }
+    }
+  }
+}
+
+strong {
+  color: var(--purple);
+}
