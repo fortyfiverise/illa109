@@ -1,9 +1,13 @@
 import React, { useState } from "react";
-// import ConfirmDialog from "./ConfirmDialog";
 
 function DeleteButton(props) {
   const handleButtonClick = () => {
-    props.confirmDelete(true);
+    const isConfirmed = window.confirm("Are you sure you want to delete?");
+
+    if (isConfirmed) {
+      localStorage.removeItem(props.selectedKey);
+      window.location.reload();
+    }
   };
 
   return (

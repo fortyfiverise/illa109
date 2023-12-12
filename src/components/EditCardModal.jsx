@@ -5,16 +5,45 @@ function EditCardModal(props) {
   const [back, setBack] = useState(props.placeHolderValue.back);
 
   const handleButtonClick = () => {
-    let obj_deserialized = JSON.parse(localStorage.getItem(props.selectedKey));
+    if (front.length != 0 && back.length != 0) {
+      let obj_deserialized = JSON.parse(
+        localStorage.getItem(props.selectedKey)
+      );
 
-    obj_deserialized.cards[props.currentIndex].front = front;
-    obj_deserialized.cards[props.currentIndex].back = back;
+      obj_deserialized.cards[props.currentIndex].front = front;
+      obj_deserialized.cards[props.currentIndex].back = back;
 
-    const obj_serialized = JSON.stringify(obj_deserialized);
-    localStorage.setItem(props.selectedKey, obj_serialized);
-    setFront("");
-    setBack("");
+      const obj_serialized = JSON.stringify(obj_deserialized);
+      localStorage.setItem(props.selectedKey, obj_serialized);
+      setFront("");
+      setBack("");
+      props.setShowModal(false);
+    }
   };
+
+  const handleButtonClickDelete = () => {
+    const isConfirmed = window.confirm("Are you sure you want to delete?");
+
+    if (isConfirmed) {
+      let obj_deserialized = JSON.parse(
+        localStorage.getItem(props.selectedKey)
+      );
+
+      if (
+        obj_deserialized &&
+        obj_deserialized.cards &&
+        props.currentIndex >= 0 &&
+        props.currentIndex < obj_deserialized.cards.length
+      ) {
+        obj_deserialized.cards.splice(props.currentIndex, 1);
+
+        const obj_serialized = JSON.stringify(obj_deserialized);
+        localStorage.setItem(props.selectedKey, obj_serialized);
+        props.setShowModal(false);
+      }
+    }
+  };
+
   return (
     <div className="modal-content">
       <form>
@@ -40,12 +69,12 @@ function EditCardModal(props) {
         </label>
         <span className="helper">
           Please ensure you input the foreign word in the front input box and
-          the English word or its meaning in the back input box.
+          its meaning in the back input box.
         </span>
       </form>
       <div className="modal-button-group">
-        <button className="ghost" onClick={() => props.setShowModal(false)}>
-          Cancel
+        <button className="ghost" onClick={() => handleButtonClickDelete()}>
+          Delete
         </button>
         <button onClick={() => handleButtonClick()}>Save</button>
       </div>

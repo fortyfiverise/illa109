@@ -4,11 +4,14 @@ import { motion } from "framer-motion";
 function Flashcard(props) {
   const [toggleFlip, setToggleFlip] = useState(true);
   const [isAnimating, setIsAnimating] = useState(false);
+
   const handleButtonClick = () => {
-    if (!isAnimating) {
-      setToggleFlip(!toggleFlip);
-      props.onToggleFlip(toggleFlip);
-      setIsAnimating(!isAnimating);
+    if (props.selectedKey.length != 0) {
+      if (!isAnimating) {
+        setToggleFlip(!toggleFlip);
+        props.onToggleFlip(toggleFlip);
+        setIsAnimating(!isAnimating);
+      }
     }
   };
   return (

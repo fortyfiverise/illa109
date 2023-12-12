@@ -29,6 +29,8 @@ const NavBar = () => {
     }
   }
 
+  const isViewDeck = location.pathname.startsWith("/viewdeck");
+
   return (
     <>
       <motion.div
@@ -42,26 +44,42 @@ const NavBar = () => {
             <FontAwesomeIcon icon={faAccusoft} />
           </div>
           <div className="nav-btn-grp">
-            <Link to="/" onClick={() => handleActiveLink(1)}>
-              <div className={`nav-title ${activeLink === 1 ? "active" : ""}`}>
-                Home
-              </div>
-            </Link>
-            <Link to="/deck" onClick={() => handleActiveLink(2)}>
-              <div className={`nav-title ${activeLink === 2 ? "active" : ""}`}>
-                Deck
-              </div>
-            </Link>
-            <Link to="/chat" onClick={() => handleActiveLink(3)}>
-              <div className={`nav-title ${activeLink === 3 ? "active" : ""}`}>
-                Chat
-              </div>
-            </Link>
-            <Link to="/feedback" onClick={() => handleActiveLink(4)}>
-              <div className={`nav-title ${activeLink === 4 ? "active" : ""}`}>
-                Feedback
-              </div>
-            </Link>
+            {isViewDeck ? (
+              <Link to="/" onClick={() => window.close()}>
+                <div className="nav-title active">Return</div>
+              </Link>
+            ) : (
+              <>
+                <Link to="/" onClick={() => handleActiveLink(1)}>
+                  <div
+                    className={`nav-title ${activeLink === 1 ? "active" : ""}`}
+                  >
+                    Home
+                  </div>
+                </Link>
+                <Link to="/deck" onClick={() => handleActiveLink(2)}>
+                  <div
+                    className={`nav-title ${activeLink === 2 ? "active" : ""}`}
+                  >
+                    Deck
+                  </div>
+                </Link>
+                <Link to="/chat" onClick={() => handleActiveLink(3)}>
+                  <div
+                    className={`nav-title ${activeLink === 3 ? "active" : ""}`}
+                  >
+                    Chat
+                  </div>
+                </Link>
+                <Link to="/feedback" onClick={() => handleActiveLink(4)}>
+                  <div
+                    className={`nav-title ${activeLink === 4 ? "active" : ""}`}
+                  >
+                    Feedback
+                  </div>
+                </Link>
+              </>
+            )}
           </div>
         </div>
       </motion.div>

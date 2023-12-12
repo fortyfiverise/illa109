@@ -4,6 +4,8 @@ import EditCardModal from "./EditCardModal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { motion } from "framer-motion";
+import NewDeckModal from "./NewDeckModal";
+import ChatSettingsModal from "./ChatSettingsModal";
 
 const Modal = (props) => {
   const handleClick = (event) => {
@@ -33,11 +35,14 @@ const Modal = (props) => {
           transition={{ duration: 0.3 }}
         >
           <div className="modal-header">
-            <span>Deck Option</span>
+            <span>Options</span>
             <FontAwesomeIcon icon={faXmark} onClick={handleClick} />
           </div>
           {props.whatModal === "DeckSettings" && (
-            <DeckSettingsModal selectedKey={props.selectedKey} />
+            <DeckSettingsModal
+              selectedKey={props.selectedKey}
+              setShowModal={props.setShowModal}
+            />
           )}
           {props.whatModal === "EditCard" && (
             <EditCardModal
@@ -46,6 +51,16 @@ const Modal = (props) => {
               selectedKey={props.selectedKey}
               currentIndex={props.currentIndex}
               placeHolderValue={props.placeHolderValue}
+            />
+          )}
+          {props.whatModal === "NewDeck" && (
+            <NewDeckModal setShowModal={props.setShowModal} />
+          )}
+          {props.whatModal === "ChatSettings" && (
+            <ChatSettingsModal
+              setShowModal={props.setShowModal}
+              language={props.language}
+              setLanguage={props.setLanguage}
             />
           )}
         </motion.div>

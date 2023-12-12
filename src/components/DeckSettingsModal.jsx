@@ -2,54 +2,47 @@ import React, { useState } from "react";
 import ExportButton from "./ExportButton";
 import DeleteButton from "./DeleteButton";
 import AddCardModal from "./AddCardModal";
-import { testing, toTesting } from "./test";
 
 const DeckSettingsModal = (props) => {
   const [modal, setModal] = useState(true);
-  const selectedKey = props.selectedKey;
+  const [selectedKey, setSelectedKey] = useState(props.selectedKey);
   const [inputValue, setInputValue] = useState("");
   const [inputDisabled, setInputDisabled] = useState(false);
   const [helperText, setHelperText] = useState(1);
 
   const handleEditDeckName = (event) => {
     event.preventDefault();
-
     const newDeckName = inputValue.trim();
 
-    if (newDeckName) {
-      if (newDeckName.length <= 70) {
-        if (localStorage.getItem(newDeckName) !== null) {
-          setHelperText(2);
-        } else {
-          const itemValue = localStorage.getItem(selectedKey);
-
-          localStorage.removeItem(selectedKey);
-
-          localStorage.setItem(newDeckName, itemValue);
-
-          setInputValue("");
-          setInputDisabled(true);
-
-          setHelperText(4);
-        }
-      } else {
-        setHelperText(5);
-      }
+    if (!newDeckName) {
+      return;
     } else {
-      setHelperText(3);
+      const itemValue = localStorage.getItem(selectedKey);
+
+      localStorage.removeItem(selectedKey);
+
+      localStorage.setItem(newDeckName, itemValue);
+
+      setInputValue("");
+      setInputDisabled(true);
+
+      window.handleStorageChange();
+      setSelectedKey(newDeckName);
     }
   };
 
   const handleInputChange = (event) => {
     setInputValue(event.target.value);
+    setHelperText(1);
+    if (event.target.value.length >= 30) {
+      setHelperText(3);
+    } else if (localStorage.getItem(event.target.value) !== null) {
+      setHelperText(2);
+    }
   };
 
-  const test = () => {
-    testing(inputValue);
-  };
-
-  const toTest = () => {
-    toTesting();
+  const handleViewAllCards = () => {
+    window.open(`/viewdeck/${selectedKey}`, "_blank");
   };
 
   return (
@@ -74,16 +67,17 @@ const DeckSettingsModal = (props) => {
             <Helper helperText={helperText} />
           </form>
           <div className="modal-button-group">
-            <DeleteButton></DeleteButton>
+            <DeleteButton selectedKey={selectedKey} />
             <ExportButton selectedKey={selectedKey} />
-            <button>View all cards</button>
+            <button onClick={handleViewAllCards}>View all cards</button>
             <button onClick={() => setModal(!modal)}>Add card</button>
-            <button onClick={() => test()}>Test</button>
-            <button onClick={() => toTest()}>toTest</button>
           </div>
         </div>
       ) : (
-        <AddCardModal selectedKey={selectedKey} />
+        <AddCardModal
+          selectedKey={selectedKey}
+          setShowModal={props.setShowModal}
+        />
       )}
     </>
   );
@@ -98,14 +92,10 @@ const Helper = ({ helperText }) => {
     case 2:
       return (
         <span className="helper error">
-          Deck already exists! Type something different.
+          Deck name already exists! Type something different.
         </span>
       );
     case 3:
-      return <span className="helper error">Please enter a deck name.</span>;
-    case 4:
-      return <span className="helper success">Deck name updated!</span>;
-    case 5:
       return <span className="helper error">Deck name is too long.</span>;
     default:
       return null;

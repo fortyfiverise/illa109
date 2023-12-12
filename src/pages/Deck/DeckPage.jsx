@@ -6,12 +6,14 @@ import { motion, AnimatePresence } from "framer-motion";
 import Modal from "../../components/Modal";
 import Flashcard from "./components/Flashcard";
 import FlashcardButtons from "./components/FlashcardButtons";
+import NewDeckModal from "../../components/NewDeckModal";
 
 const DeckPage = () => {
   let object = {
     cards: [],
   };
   const [showModal, setShowModal] = useState(false);
+  const [newDeckModal, setNewDeckModal] = useState(false);
   const [editCardModal, setEditCardModal] = useState(false);
   const [selectedKey, setSelectedKey] = useState("");
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -88,6 +90,7 @@ const DeckPage = () => {
           </div>
           <AnimatePresence node="wait">
             <Flashcard
+              selectedKey={selectedKey}
               textOutput={cardOutput}
               onToggleFlip={() => setCardIndicator(!cardIndicator)}
             />
@@ -108,7 +111,11 @@ const DeckPage = () => {
               <div className="indicator"></div>
               <div className="title">DECKS</div>
             </div>
-            <div className="subtitle" title="New deck">
+            <div
+              className="subtitle"
+              title="New deck"
+              onClick={() => setNewDeckModal(!newDeckModal)}
+            >
               <FontAwesomeIcon icon={faCirclePlus} />
             </div>
           </div>
@@ -139,6 +146,9 @@ const DeckPage = () => {
             placeHolderValue={cardOutput}
             currentIndex={currentIndex}
           />
+        )}
+        {newDeckModal && (
+          <Modal setShowModal={setNewDeckModal} whatModal={"NewDeck"} />
         )}
       </AnimatePresence>
     </>

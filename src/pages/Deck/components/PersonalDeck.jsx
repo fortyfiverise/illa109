@@ -12,6 +12,10 @@ const PersonalDeck = (props) => {
     setActiveKey(key);
   };
 
+  const handleViewAllCards = (key) => {
+    window.open(`/viewdeck/${key}`, "_blank");
+  };
+
   const handleLoadKeys = (key) => {
     const deckData = localStorage.getItem(key);
     const deckArray = deckData ? JSON.parse(deckData) : [];
@@ -19,15 +23,15 @@ const PersonalDeck = (props) => {
     return cardCount;
   };
 
-  useEffect(() => {
-    // Update localStorageKeys when the keys in localStorage change
-    const handleStorageChange = () => {
-      setLocalStorageKeys(Object.keys(localStorage));
-    };
+  const handleStorageChange = () => {
+    setLocalStorageKeys(Object.keys(localStorage));
+  };
 
+  window.handleStorageChange = handleStorageChange;
+
+  useEffect(() => {
     window.addEventListener("storage", handleStorageChange);
 
-    // Cleanup the event listener when the component unmounts
     return () => {
       window.removeEventListener("storage", handleStorageChange);
     };
@@ -47,14 +51,16 @@ const PersonalDeck = (props) => {
                 <span className="title">{key}</span>
                 <div className="row">
                   <span>{handleLoadKeys(key)} cards</span>
-                  <span>view all cards</span>
+                  <span onClick={() => handleViewAllCards(key)}>
+                    view all cards
+                  </span>
                 </div>
               </div>
               <hr />
             </>
           ))
         ) : (
-          <span>NoKeys</span>
+          <span>Add a deck...</span>
         )}
       </div>
     </>

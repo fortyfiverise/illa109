@@ -8,15 +8,13 @@ function ExportButton(props) {
     if (!parsedData) {
       console.error("Invalid data in local storage.");
     } else {
-      // Convert the objects into CSV format
       const cards = parsedData.cards;
-      let csvContent = `DeckName: ${props.selectedKey}\n`;
+      let csvContent = "";
 
       cards.forEach((card) => {
         csvContent += `${card.front};${card.back}\n`;
       });
 
-      // Create and trigger a download for the CSV file
       const blob = new Blob([csvContent], { type: "text/csv" });
       const fileName = `${props.selectedKey}.csv`;
       const a = document.createElement("a");

@@ -7,6 +7,7 @@ import {
   faVolumeHigh,
 } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useState } from "react";
+import { TTS } from "../../../components/TextToSpeech";
 
 function FlashcardButtons(props) {
   const [randomIndex, setRandomIndex] = useState(false);
@@ -33,7 +34,7 @@ function FlashcardButtons(props) {
     props.currentIndex((prevIndex) => prevIndex - 1);
   };
   const handleSpeakButton = () => {
-    alert(props.textOutput.front);
+    TTS(props.textOutput.front);
   };
 
   return (

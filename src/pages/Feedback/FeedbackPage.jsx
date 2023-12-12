@@ -17,10 +17,7 @@ const FeedbackPage = () => {
     };
 
     axios
-      .post(
-        "https://getform.io/f/d098a15b-2715-4716-80a1-13b1b07b71b3",
-        formData
-      )
+      .post("useurown", formData)
       .then((response) => {
         console.log("Success:", response);
       })

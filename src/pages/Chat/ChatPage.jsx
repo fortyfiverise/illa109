@@ -3,13 +3,16 @@ import axios from "axios";
 import ChatMessages from "./components/chatBox";
 import ChatForm from "./components/chatInput";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faGear } from "@fortawesome/free-solid-svg-icons";
-import { motion } from "framer-motion";
+import { faGear, faVolumeHigh } from "@fortawesome/free-solid-svg-icons";
+import { motion, AnimatePresence } from "framer-motion";
+import { TTS } from "../../components/TextToSpeech";
+import Modal from "../../components/Modal";
 
 const ChatPage = () => {
+  const [language, setLanguage] = useState("english");
   const [messages, setMessages] = useState([]);
   const [showModal, setShowModal] = useState(false);
-  const apiKey = "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";
+  const apiKey = "useurown";
 
   const sendMessage = async (message) => {
     setMessages((prevMessages) => [
@@ -22,7 +25,7 @@ const ChatPage = () => {
       const response = await axios.post(
         "https://api.openai.com/v1/completions",
         {
-          prompt: "converstate in thai," + message,
+          prompt: "converstate in" + language + ", " + message,
           model: "text-davinci-003",
           temperature: 0,
           max_tokens: 800,
@@ -42,7 +45,18 @@ const ChatPage = () => {
 
       setMessages((prevMessages) => [
         ...prevMessages.slice(0, -1),
-        { type: "bot", text: chatbotResponse },
+        {
+          type: "bot",
+          text: (
+            <>
+              {chatbotResponse}
+              <FontAwesomeIcon
+                icon={faVolumeHigh}
+                onClick={() => TTS(chatbotResponse)}
+              />
+            </>
+          ),
+        },
       ]);
     } catch (error) {
       console.error("Error fetching chatbot response:", error);
@@ -51,7 +65,6 @@ const ChatPage = () => {
 
   const handleButtonClick = () => {
     setShowModal(true);
-    console.error("e");
   };
 
   return (
@@ -80,6 +93,16 @@ const ChatPage = () => {
           <ChatForm onSendMessage={sendMessage} />
         </div>
       </motion.div>
+      <AnimatePresence>
+        {showModal && (
+          <Modal
+            setShowModal={setShowModal}
+            whatModal={"ChatSettings"}
+            language={language}
+            setLanguage={setLanguage}
+          />
+        )}
+      </AnimatePresence>
     </>
   );
 };

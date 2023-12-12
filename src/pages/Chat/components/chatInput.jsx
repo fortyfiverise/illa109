@@ -42,7 +42,6 @@ const ChatInput = ({ onSendMessage }) => {
     };
 
     return () => {
-      // Cleanup on component unmount
       mic.stop();
       mic.onresult = null;
       mic.onerror = null;
